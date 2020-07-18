@@ -3,12 +3,18 @@ package com.hellbean.bbbs;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 class Post {
     private @Id @GeneratedValue Long id;
     private String title;
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name="userId")
+    private User user;
 
     Post () {}
 
@@ -39,5 +45,13 @@ class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

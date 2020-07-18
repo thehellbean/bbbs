@@ -16,9 +16,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 class PostController {
     private final PostRepository repository;
+    private final UserRepository userRepository;
 
-    PostController(PostRepository repository) {
+    PostController(PostRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/posts")
@@ -28,6 +30,7 @@ class PostController {
 
     @PostMapping("/posts")
     Post newPost(@RequestBody Post newPost) {
+      newPost.setUser(userRepository.getOne(1L));
       return repository.save(newPost);
     }
 

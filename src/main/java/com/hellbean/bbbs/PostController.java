@@ -33,7 +33,7 @@ class PostController {
 
     @GetMapping("/posts/{id}")
     EntityModel<Post> one(@PathVariable Long id) {
-        Post post = repository.findById(id).orElseThrow(() -> new PostNotFoundException(id));
+        Post post = repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
 
         return EntityModel.of(post, linkTo(methodOn(PostController.class).one(id)).withSelfRel(), linkTo(methodOn(PostController.class).all()).withRel("posts"));
     }

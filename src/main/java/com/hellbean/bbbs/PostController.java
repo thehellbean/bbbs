@@ -29,9 +29,9 @@ class PostController {
     } 
 
     @PostMapping("/posts")
-    Post newPost(@RequestBody Post newPost) {
-      newPost.setUser(userRepository.getOne(1L));
-      return repository.save(newPost);
+    Post newPost(@RequestBody PostContext newPost) {
+      newPost.getPost().setUser(userRepository.getOne(newPost.getUserId()));
+      return repository.save(newPost.getPost());
     }
 
     @GetMapping("/posts/{id}")

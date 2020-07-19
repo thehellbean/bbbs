@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 class Post {
     private @Id @GeneratedValue Long id;
@@ -14,6 +16,7 @@ class Post {
 
     @ManyToOne
     @JoinColumn(name="userId")
+    @JsonBackReference
     private User user;
 
     Post () {}

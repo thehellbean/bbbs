@@ -6,9 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 class Post {
     private @Id @GeneratedValue Long id;
     private String title;
@@ -16,7 +18,6 @@ class Post {
 
     @ManyToOne
     @JoinColumn(name="userId")
-    @JsonBackReference
     private User user;
 
     Post () {}

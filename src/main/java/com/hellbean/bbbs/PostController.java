@@ -30,7 +30,7 @@ class PostController {
 
     @PostMapping("/posts")
     Post newPost(@RequestBody PostContext newPost) {
-      newPost.getPost().setUser(userRepository.getOne(newPost.getUserId()));
+      newPost.getPost().setUser(userRepository.findById(newPost.getUserId()).get());
       return repository.save(newPost.getPost());
     }
 
